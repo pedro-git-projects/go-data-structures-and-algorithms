@@ -1,14 +1,14 @@
-package lnkdlist_test
+package linkedlist_test
 
 import (
 	"reflect"
 	"testing"
 
-	"github.com/pedro-git-projects/go-data-structures-and-algorithms/src/lnkdlist"
+	"github.com/pedro-git-projects/go-data-structures-and-algorithms/src/linkedlist"
 )
 
 func TestGettersLen1(t *testing.T) {
-	l := lnkdlist.New(2)
+	l := linkedlist.New(2)
 
 	head := l.Head()
 	if head.Value() != 2 {
@@ -27,7 +27,7 @@ func TestGettersLen1(t *testing.T) {
 }
 
 func TestGettersLenGte1(t *testing.T) {
-	l := lnkdlist.New(2)
+	l := linkedlist.New(2)
 	l.Append(3)
 	l.Append(4)
 	l.Append(5)
@@ -50,7 +50,7 @@ func TestGettersLenGte1(t *testing.T) {
 
 func TestString(t *testing.T) {
 	v := []int{1, 2}
-	l := lnkdlist.New(v)
+	l := linkedlist.New(v)
 	str := l.String()
 	if !reflect.DeepEqual(reflect.TypeOf(str), reflect.TypeOf(*new(string))) {
 		t.Errorf("Expected type string, but got %T", str)
@@ -58,7 +58,7 @@ func TestString(t *testing.T) {
 }
 
 func TestAppend(t *testing.T) {
-	l := lnkdlist.New(1)
+	l := linkedlist.New(1)
 	app := l.Append(2)
 	app = l.Append(3)
 	expected := 3
@@ -74,7 +74,7 @@ func TestAppend(t *testing.T) {
 }
 
 func TestRemoveLastNonNil(t *testing.T) {
-	l := lnkdlist.New(1)
+	l := linkedlist.New(1)
 	rem := l.Append(2)
 	rem = l.Append(3)
 	rem = l.RemoveLast()
@@ -90,7 +90,7 @@ func TestRemoveLastNonNil(t *testing.T) {
 }
 
 func TestRemoveLastNil(t *testing.T) {
-	l := lnkdlist.New(1)
+	l := linkedlist.New(1)
 	rem := l.RemoveLast()
 	expected := 0
 
@@ -109,7 +109,7 @@ func TestRemoveLastNil(t *testing.T) {
 }
 
 func TestPrepend(t *testing.T) {
-	l := lnkdlist.New(1)
+	l := linkedlist.New(1)
 	b := l.Prepend(0)
 	expected := 2
 
@@ -124,7 +124,7 @@ func TestPrepend(t *testing.T) {
 }
 
 func TestPrependEmpty(t *testing.T) {
-	l := lnkdlist.New(1)
+	l := linkedlist.New(1)
 	l.RemoveLast()
 	b := l.Prepend(0)
 	expected := 1
@@ -148,7 +148,7 @@ func TestPrependEmpty(t *testing.T) {
 }
 
 func TestRemoveOnly(t *testing.T) {
-	l := lnkdlist.New(1)
+	l := linkedlist.New(1)
 	b := l.RemoveFirst()
 	expected := 0
 
@@ -162,7 +162,7 @@ func TestRemoveOnly(t *testing.T) {
 }
 
 func TestRemoveFirst(t *testing.T) {
-	l := lnkdlist.New(1)
+	l := linkedlist.New(1)
 	l.Append(2)
 	b := l.RemoveFirst()
 	expected := 1
@@ -177,7 +177,7 @@ func TestRemoveFirst(t *testing.T) {
 }
 
 func TestGetByIndex(t *testing.T) {
-	l := lnkdlist.New(1)
+	l := linkedlist.New(1)
 	l.Append(2)
 	l.Prepend(0)
 	l.Append(3)

@@ -1,4 +1,4 @@
-package lnkdlist
+package linkedlist
 
 import (
 	"fmt"
