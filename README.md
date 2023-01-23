@@ -1,11 +1,12 @@
 # Data Structures and Algorithms in Go
 
 ##### Table of Contents  
-[Node](#node)
-[Linked List](#linkedlist)
+- [Node](#node)
 
-<a name="node"/>
+- [Linked List](#linkedlist)
+
 ## Node
+
 [Node](https://github.com/pedro-git-projects/go-data-structures-and-algorithms/tree/master/src/node)
 
 ```go
@@ -18,8 +19,9 @@ type Node[T any] struct {
 ```
 
 
-<a name="linkedlist"/>
+
 ## Linked List
+
 [Linked List](https://github.com/pedro-git-projects/go-data-structures-and-algorithms/tree/master/src/linkedlist)
 
 ```go
