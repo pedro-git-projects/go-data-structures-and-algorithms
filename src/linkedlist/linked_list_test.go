@@ -189,3 +189,76 @@ func TestGetByIndex(t *testing.T) {
 		t.Errorf("Expected %d but got %d", expected, result.Value())
 	}
 }
+
+func TestSet(t *testing.T) {
+	l := linkedlist.New(1)
+	l.Append(2)
+	l.Set(1, 0)
+	got := l.GetByIndex(1)
+	expected := 0
+
+	if got.Value() != expected {
+		t.Errorf("Expected %d but got %d", expected, got.Value())
+	}
+
+	expected = 2
+	length := l.Length()
+
+	if length != expected {
+		t.Errorf("Expected %d but got %d", expected, length)
+	}
+}
+
+func TestRemove(t *testing.T) {
+	l := linkedlist.New(1)
+	l.Append(2)
+	l.Append(3)
+	b4 := l.GetByIndex(3)
+	l.Append(4)
+	l.Prepend(0)
+
+	b := l.Remove(3)
+	after := l.GetByIndex(3)
+
+	if b4 == after {
+		t.Errorf("Expected %v but got %v", b4, after)
+	}
+
+	if !b {
+		t.Error("Expected true, but got false")
+	}
+}
+
+func TestReverse(t *testing.T) {
+	l := linkedlist.New(1)
+	l.Append(2)
+	l.Append(3)
+	l.Append(4)
+	l.Append(5)
+	l.Append(6)
+	l.Append(7)
+
+	var original []int
+	for i := 0; i < l.Length(); i++ {
+		original = append(original, l.GetByIndex(i).Value())
+	}
+
+	l.Reverse()
+	var reversed []int
+	for i := 0; i < l.Length(); i++ {
+		reversed = append(reversed, l.GetByIndex(i).Value())
+	}
+
+	expected := []int{
+		7, 6, 5, 4, 3, 2, 1,
+	}
+
+	if !reflect.DeepEqual(expected, reversed) {
+		t.Errorf("Expected %v but got %v", expected, reversed)
+	}
+
+	if reflect.DeepEqual(original, reversed) {
+		t.Errorf("Expected %v but got %v", expected, reversed)
+	}
+
+}

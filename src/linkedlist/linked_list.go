@@ -39,7 +39,7 @@ func (ll LinkedList[T]) String() string {
 	acc := ""
 	for temp != nil {
 		acc += fmt.Sprintf("%v", temp.Value())
-		acc += " "
+		acc += " -> "
 		temp = temp.Next()
 	}
 	return acc
@@ -120,5 +120,52 @@ func (ll *LinkedList[T]) GetByIndex(index int) *node.Node[T] {
 			n = n.Next()
 		}
 		return n
+	}
+}
+
+func (ll *LinkedList[T]) Set(index int, value T) bool {
+	n := ll.GetByIndex(index)
+	if n != nil {
+		n.SetValue(value)
+		return true
+	} else {
+		return false
+	}
+}
+
+func (ll *LinkedList[T]) Remove(index int) bool {
+	n := ll.GetByIndex(index)
+	if n == nil {
+		return false
+	}
+	if index == 0 {
+		b := ll.RemoveFirst()
+		return b
+	}
+	if index == ll.length-1 {
+		return ll.RemoveLast()
+	}
+
+	prev := ll.GetByIndex(index - 1)
+	tmp := prev.Next()
+	prev.SetNext(tmp.Next())
+	tmp.SetNext(nil)
+	ll.length--
+	return true
+}
+
+func (ll *LinkedList[T]) Reverse() {
+	tmp := ll.Head()
+	ll.head = ll.tail
+	ll.tail = tmp
+
+	after := tmp.Next()
+	var before *node.Node[T] = nil
+
+	for i := 0; i < ll.length; i++ {
+		after = tmp.Next()
+		tmp.SetNext(before)
+		before = tmp
+		tmp = after
 	}
 }

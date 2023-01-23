@@ -24,3 +24,7 @@ func (n Node[T]) Next() *Node[T] {
 func (n *Node[T]) SetNext(newNode *Node[T]) {
 	n.next = newNode
 }
+
+func (n *Node[T]) SetValue(newValue T) {
+	n.value = newValue
+}
