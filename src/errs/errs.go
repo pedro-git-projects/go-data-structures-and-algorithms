@@ -7,6 +7,7 @@ import (
 
 var (
 	OutOfBounds = errors.New("out of bounds")
+	HeightZero  = errors.New("unallowed on height 0")
 )
 
 func OpOnZeroLen(operation, dataStructure string) error {

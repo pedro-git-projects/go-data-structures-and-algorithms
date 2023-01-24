@@ -3,16 +3,17 @@ package stack
 import (
 	"fmt"
 
-	"github.com/pedro-git-projects/go-data-structures-and-algorithms/src/node"
+	"github.com/pedro-git-projects/go-data-structures-and-algorithms/src/errs"
+	"github.com/pedro-git-projects/go-data-structures-and-algorithms/src/item"
 )
 
 type Stack[T any] struct {
-	top    *node.Node[T]
+	top    *item.Item[T]
 	height int
 }
 
 func New[T any](value T) *Stack[T] {
-	t := node.New(value)
+	t := item.New(value)
 	s := &Stack[T]{
 		top:    t,
 		height: 1,
@@ -20,7 +21,7 @@ func New[T any](value T) *Stack[T] {
 	return s
 }
 
-func (s Stack[T]) Top() *node.Node[T] {
+func (s Stack[T]) Top() *item.Item[T] {
 	return s.top
 }
 
@@ -39,9 +40,21 @@ func (s Stack[T]) String() string {
 	return str
 }
 
-func (s Stack[T]) Push(value T) {
-	n := node.New(value)
-	n.SetNext(s.top)
-	s.top = n
+func (s *Stack[T]) Push(value T) {
+	i := item.New(value)
+	i.SetNext(s.top)
+	s.top = i
 	s.height++
+}
+
+func (s *Stack[T]) Pop() (item *item.Item[T], err error) {
+	if s.height == 0 {
+		return nil, errs.HeightZero
+	}
+
+	poped := s.top
+	s.top = s.top.Next()
+	s.height--
+
+	return poped, nil
 }
