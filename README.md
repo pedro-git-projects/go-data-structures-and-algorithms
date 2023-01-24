@@ -7,7 +7,7 @@
 
 ## Node
 
-[Node](https://github.com/pedro-git-projects/go-data-structures-and-algorithms/tree/master/src/node)
+[Code](https://github.com/pedro-git-projects/go-data-structures-and-algorithms/tree/master/src/node)
 
 ```go
 package node
@@ -22,7 +22,7 @@ type Node[T any] struct {
 
 ## Linked List
 
-[Linked List](https://github.com/pedro-git-projects/go-data-structures-and-algorithms/tree/master/src/linkedlist)
+[Code](https://github.com/pedro-git-projects/go-data-structures-and-algorithms/tree/master/src/linkedlist)
 
 ```go
 type LinkedList[T any] struct {
