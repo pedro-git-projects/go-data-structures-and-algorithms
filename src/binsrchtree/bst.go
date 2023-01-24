@@ -56,3 +56,22 @@ func (bst *BST[T]) Insert(value T) error {
 		}
 	}
 }
+
+func (bst BST[T]) Contains(value T) bool {
+	if bst.root == nil {
+		return false
+	}
+
+	tmp := bst.root
+	for tmp != nil {
+		if value < tmp.Value() {
+			tmp = tmp.Left()
+		} else if value > tmp.Value() {
+			tmp = tmp.Right()
+		} else {
+			return true
+		}
+	}
+
+	return false
+}

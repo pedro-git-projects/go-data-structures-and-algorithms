@@ -15,6 +15,10 @@
 
 - [Queue](#queue)
 
+- [Binary Node](#bnode)
+
+- [Binary Search Tree](#binsrchtree)
+
 ## Node
 
 [Code](https://github.com/pedro-git-projects/go-data-structures-and-algorithms/tree/master/src/node)
@@ -99,6 +103,27 @@ type Queue[T any] struct {
 	first  *item.Item[T]
 	last   *item.Item[T]
 	lenght int
+}
+```
+
+## Binary Node 
+
+[Code](https://github.com/pedro-git-projects/go-data-structures-and-algorithms/tree/master/src/bnode)
+
+```go
+type BNode[T constraints.Ordered] struct {
+	value T
+	left  *BNode[T]
+	right *BNode[T]
+}
+```
+## Binary Search Tree 
+
+[Code](https://github.com/pedro-git-projects/go-data-structures-and-algorithms/tree/master/src/binsrchtree)
+
+```go
+type BST[T constraints.Ordered] struct {
+	root *bnode.BNode[T]
 }
 ```
 
