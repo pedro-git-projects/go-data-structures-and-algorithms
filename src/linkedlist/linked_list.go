@@ -112,15 +112,14 @@ func (ll *LinkedList[T]) RemoveFirst() bool {
 }
 
 func (ll *LinkedList[T]) GetByIndex(index int) *node.Node[T] {
-	if index < 0 || index > ll.length {
+	if index < 0 || index >= ll.length {
 		return nil
-	} else {
-		n := ll.head
-		for i := 0; i != index; i++ {
-			n = n.Next()
-		}
-		return n
 	}
+	desired := ll.head
+	for i := 0; i < index; i++ {
+		desired = desired.Next()
+	}
+	return desired
 }
 
 func (ll *LinkedList[T]) Set(index int, value T) bool {
@@ -151,6 +150,30 @@ func (ll *LinkedList[T]) Remove(index int) bool {
 	prev.SetNext(tmp.Next())
 	tmp.SetNext(nil)
 	ll.length--
+	return true
+}
+
+func (ll *LinkedList[T]) Insert(index int, value T) bool {
+	desired := ll.GetByIndex(index)
+
+	if desired == nil {
+		return false
+	}
+
+	if index == 0 {
+		return ll.Prepend(value)
+	}
+
+	if index == ll.length {
+		return ll.Append(value)
+	}
+
+	n := node.New(value)
+	prev := ll.GetByIndex(index - 1)
+	n.SetNext(prev.Next())
+	prev.SetNext(n)
+	ll.length++
+
 	return true
 }
 

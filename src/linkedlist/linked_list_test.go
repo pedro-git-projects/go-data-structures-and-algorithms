@@ -188,6 +188,13 @@ func TestGetByIndex(t *testing.T) {
 	if result.Value() != expected {
 		t.Errorf("Expected %d but got %d", expected, result.Value())
 	}
+
+	result = l.GetByIndex(2)
+	expected = 2
+
+	if result.Value() != expected {
+		t.Errorf("Expected %d but got %d", expected, result.Value())
+	}
 }
 
 func TestSet(t *testing.T) {
@@ -226,6 +233,29 @@ func TestRemove(t *testing.T) {
 
 	if !b {
 		t.Error("Expected true, but got false")
+	}
+}
+
+func TestInsert(t *testing.T) {
+	l := linkedlist.New(1)
+	l.Append(2)
+	l.Prepend(0)
+	l.Append(3)
+
+	l.Insert(2, 9)
+	got := l.GetByIndex(2).Value()
+
+	expected := 9
+
+	if got != expected {
+		t.Errorf("Expected %d but got %d", expected, got)
+	}
+
+	expected = 5
+	length := l.Length()
+
+	if length != expected {
+		t.Errorf("Expected %d but got %d", expected, length)
 	}
 }
 
