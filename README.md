@@ -1,25 +1,17 @@
 # Data Structures and Algorithms in Go
 
-##### Table of Contents  
-- [Node](#node)
+### Table of Contents  
 
-- [Linked List](#linkedlist)
-
-- [Two Pointer Node](#dnode)
-
-- [Doubly Linked List](#dlinkedlist)
-
+- [Linked List](#linked-list)
+- [Two Pointer Node](#two-pointer-node)
+- [Doubly Linked List](#doubly-linked-list)
 - [Item](#item)
-
 - [Stack](#stack)
-
 - [Queue](#queue)
+- [Binary Node](#binary-node)
+- [Binary Search Tree](#binary-search-tree)
 
-- [Binary Node](#bnode)
-
-- [Binary Search Tree](#binsrchtree)
-
-## Node
+### Node
 
 [Code](https://github.com/pedro-git-projects/go-data-structures-and-algorithms/tree/master/src/node)
 
@@ -34,7 +26,7 @@ type Node[T any] struct {
 
 
 
-## Linked List
+### Linked List
 
 [Code](https://github.com/pedro-git-projects/go-data-structures-and-algorithms/tree/master/src/linkedlist)
 
@@ -46,7 +38,7 @@ type LinkedList[T any] struct {
 }
 ```
 
-## Two Pointer Node
+### Two Pointer Node
 
 [Code](https://github.com/pedro-git-projects/go-data-structures-and-algorithms/tree/master/src/dnode)
 
@@ -58,9 +50,7 @@ type DNode[T any] struct {
 }
 ```
 
-
-
-## Doubly Linked List
+### Doubly Linked List
 
 [Code](https://github.com/pedro-git-projects/go-data-structures-and-algorithms/tree/master/src/dlinkedlist)
 
@@ -72,7 +62,7 @@ type DLinkedList[T any] struct {
 }
 ```
 
-## Item
+### Item
 
 [Code](https://github.com/pedro-git-projects/go-data-structures-and-algorithms/tree/master/src/item)
 
@@ -83,7 +73,7 @@ type Item[T any] struct {
 }
 ```
 
-## Stack
+### Stack
 
 [Code](https://github.com/pedro-git-projects/go-data-structures-and-algorithms/tree/master/src/stack)
 
@@ -94,7 +84,7 @@ type Stack[T any] struct {
 }
 ```
 
-## Queue 
+### Queue 
 
 [Code](https://github.com/pedro-git-projects/go-data-structures-and-algorithms/tree/master/src/queue)
 
@@ -106,7 +96,7 @@ type Queue[T any] struct {
 }
 ```
 
-## Binary Node 
+### Binary Node 
 
 [Code](https://github.com/pedro-git-projects/go-data-structures-and-algorithms/tree/master/src/bnode)
 
@@ -117,7 +107,7 @@ type BNode[T constraints.Ordered] struct {
 	right *BNode[T]
 }
 ```
-## Binary Search Tree 
+### Binary Search Tree 
 
 [Code](https://github.com/pedro-git-projects/go-data-structures-and-algorithms/tree/master/src/binsrchtree)
 
