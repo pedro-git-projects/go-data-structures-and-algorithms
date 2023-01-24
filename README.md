@@ -9,6 +9,12 @@
 
 - [Doubly Linked List](#dlinkedlist)
 
+- [Item](#item)
+
+- [Stack](#stack)
+
+- [Queue](#queue)
+
 ## Node
 
 [Code](https://github.com/pedro-git-projects/go-data-structures-and-algorithms/tree/master/src/node)
@@ -61,3 +67,38 @@ type DLinkedList[T any] struct {
 	length int
 }
 ```
+
+## Item
+
+[Code](https://github.com/pedro-git-projects/go-data-structures-and-algorithms/tree/master/src/item)
+
+```go
+type Item[T any] struct {
+	value T
+	next  *Item[T]
+}
+```
+
+## Stack
+
+[Code](https://github.com/pedro-git-projects/go-data-structures-and-algorithms/tree/master/src/stack)
+
+```go
+type Stack[T any] struct {
+	top    *item.Item[T]
+	height int
+}
+```
+
+## Queue 
+
+[Code](https://github.com/pedro-git-projects/go-data-structures-and-algorithms/tree/master/src/queue)
+
+```go
+type Queue[T any] struct {
+	first  *item.Item[T]
+	last   *item.Item[T]
+	lenght int
+}
+```
+
