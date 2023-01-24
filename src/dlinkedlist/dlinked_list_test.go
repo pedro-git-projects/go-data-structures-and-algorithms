@@ -69,46 +69,46 @@ func TestString(t *testing.T) {
 
 func TestAppend(t *testing.T) {
 	l := dlinkedlist.New(1)
-	app := l.Append(2)
-	app = l.Append(3)
+	l.Append(2)
+	err := l.Append(3)
 	expected := 3
 
 	if l.Length() != expected {
 		t.Errorf("Expected %d but got %d", expected, l.Length())
 	}
 
-	if !app {
-		t.Errorf("Expected %t but got %t", true, false)
+	if err != nil {
+		t.Error(err)
 	}
 }
 
 func TestRemoveLastNonNil(t *testing.T) {
 	l := dlinkedlist.New(1)
-	rem := l.Append(2)
-	rem = l.Append(3)
-	rem = l.RemoveLast()
+	l.Append(2)
+	l.Append(3)
+	err := l.RemoveLast()
 	expected := 2
 
 	if l.Length() != expected {
 		t.Errorf("Expected %d but got %d", expected, l.Length())
 	}
 
-	if !rem {
-		t.Errorf("Expected %t but got %t", true, false)
+	if err != nil {
+		t.Error(err)
 	}
 }
 
 func TestRemoveLastNil(t *testing.T) {
 	l := dlinkedlist.New(1)
-	rem := l.RemoveLast()
+	err := l.RemoveLast()
 	expected := 0
 
 	if l.Length() != expected {
 		t.Errorf("Expected %d but got %d", expected, l.Length())
 	}
 
-	if !rem {
-		t.Errorf("Expected %t but got %t", true, false)
+	if err != nil {
+		t.Error(err)
 	}
 
 	if l.Head() != nil || l.Tail() != nil {
@@ -119,30 +119,30 @@ func TestRemoveLastNil(t *testing.T) {
 
 func TestRemoveOnly(t *testing.T) {
 	l := dlinkedlist.New(1)
-	b := l.RemoveFirst()
+	err := l.RemoveFirst()
 	expected := 0
 
 	if l.Length() != expected {
 		t.Errorf("Expected %d but got %d", expected, l.Length())
 	}
 
-	if !b {
-		t.Errorf("Expected %t but got %t", true, false)
+	if err != nil {
+		t.Error(err)
 	}
 }
 
 func TestRemoveFirst(t *testing.T) {
 	l := dlinkedlist.New(1)
 	l.Append(2)
-	b := l.RemoveFirst()
+	err := l.RemoveFirst()
 	expected := 1
 
 	if l.Length() != expected {
 		t.Errorf("Expected %d but got %d", expected, l.Length())
 	}
 
-	if !b {
-		t.Errorf("Expected %t but got %t", true, false)
+	if err != nil {
+		t.Error(err)
 	}
 }
 
@@ -152,7 +152,7 @@ func TestGet(t *testing.T) {
 	l.Prepend(0)
 	l.Append(3)
 
-	result := l.Get(0)
+	result, _ := l.Get(0)
 	expected := 0
 
 	if result.Value() != expected {
@@ -164,7 +164,7 @@ func TestSet(t *testing.T) {
 	l := dlinkedlist.New(1)
 	l.Append(2)
 	l.Set(1, 0)
-	got := l.Get(1)
+	got, _ := l.Get(1)
 	expected := 0
 
 	if got.Value() != expected {
@@ -186,7 +186,8 @@ func TestInsert(t *testing.T) {
 	l.Append(3)
 
 	l.Insert(2, 9)
-	got := l.Get(2).Value()
+	v, _ := l.Get(2)
+	got := v.Value()
 
 	expected := 9
 
@@ -206,18 +207,18 @@ func TestRemove(t *testing.T) {
 	l := dlinkedlist.New(1)
 	l.Append(2)
 	l.Append(3)
-	b4 := l.Get(3)
+	b4, _ := l.Get(3)
 	l.Append(4)
 	l.Prepend(0)
 
-	b := l.Remove(3)
-	after := l.Get(3)
+	err := l.Remove(3)
+	after, _ := l.Get(3)
 
 	if b4 == after {
 		t.Errorf("Expected %v but got %v", b4, after)
 	}
 
-	if !b {
-		t.Error("Expected true, but got false")
+	if err != nil {
+		t.Error(err)
 	}
 }

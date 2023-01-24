@@ -3,6 +3,7 @@ package linkedlist
 import (
 	"fmt"
 
+	"github.com/pedro-git-projects/go-data-structures-and-algorithms/src/errs"
 	"github.com/pedro-git-projects/go-data-structures-and-algorithms/src/node"
 )
 
@@ -45,7 +46,7 @@ func (ll LinkedList[T]) String() string {
 	return acc
 }
 
-func (ll *LinkedList[T]) Append(value T) bool {
+func (ll *LinkedList[T]) Append(value T) error {
 	n := node.New(value)
 	if ll.length == 0 {
 		ll.head = n
@@ -55,12 +56,12 @@ func (ll *LinkedList[T]) Append(value T) bool {
 		ll.tail = n
 	}
 	ll.length++
-	return true
+	return nil
 }
 
-func (ll *LinkedList[T]) RemoveLast() bool {
+func (ll *LinkedList[T]) RemoveLast() error {
 	if ll.length == 0 {
-		return false
+		return errs.OpOnZeroLen("append", "list")
 	}
 
 	desired := ll.head
@@ -79,10 +80,10 @@ func (ll *LinkedList[T]) RemoveLast() bool {
 		ll.tail = nil
 	}
 
-	return true
+	return nil
 }
 
-func (ll *LinkedList[T]) Prepend(value T) bool {
+func (ll *LinkedList[T]) Prepend(value T) error {
 	n := node.New(value)
 	if ll.head != nil {
 		n.SetNext(ll.head)
@@ -92,12 +93,12 @@ func (ll *LinkedList[T]) Prepend(value T) bool {
 		ll.tail = n
 	}
 	ll.length++
-	return true
+	return nil
 }
 
-func (ll *LinkedList[T]) RemoveFirst() bool {
+func (ll *LinkedList[T]) RemoveFirst() error {
 	if ll.length == 0 {
-		return false
+		return errs.OpOnZeroLen("remove first in", "list")
 	}
 
 	desired := ll.head
@@ -108,34 +109,34 @@ func (ll *LinkedList[T]) RemoveFirst() bool {
 	if ll.length == 0 {
 		ll.tail = nil
 	}
-	return true
+	return nil
 }
 
-func (ll *LinkedList[T]) GetByIndex(index int) *node.Node[T] {
+func (ll *LinkedList[T]) GetByIndex(index int) (*node.Node[T], error) {
 	if index < 0 || index >= ll.length {
-		return nil
+		return nil, errs.OutOfBounds
 	}
 	desired := ll.head
 	for i := 0; i < index; i++ {
 		desired = desired.Next()
 	}
-	return desired
+	return desired, nil
 }
 
-func (ll *LinkedList[T]) Set(index int, value T) bool {
-	n := ll.GetByIndex(index)
+func (ll *LinkedList[T]) Set(index int, value T) error {
+	n, err := ll.GetByIndex(index)
 	if n != nil {
 		n.SetValue(value)
-		return true
+		return nil
 	} else {
-		return false
+		return err
 	}
 }
 
-func (ll *LinkedList[T]) Remove(index int) bool {
-	n := ll.GetByIndex(index)
-	if n == nil {
-		return false
+func (ll *LinkedList[T]) Remove(index int) error {
+	_, err := ll.GetByIndex(index)
+	if err != nil {
+		return err
 	}
 	if index == 0 {
 		b := ll.RemoveFirst()
@@ -145,19 +146,21 @@ func (ll *LinkedList[T]) Remove(index int) bool {
 		return ll.RemoveLast()
 	}
 
-	prev := ll.GetByIndex(index - 1)
+	prev, _ := ll.GetByIndex(index - 1)
 	tmp := prev.Next()
+
 	prev.SetNext(tmp.Next())
 	tmp.SetNext(nil)
+
 	ll.length--
-	return true
+	return nil
 }
 
-func (ll *LinkedList[T]) Insert(index int, value T) bool {
-	desired := ll.GetByIndex(index)
+func (ll *LinkedList[T]) Insert(index int, value T) error {
+	_, err := ll.GetByIndex(index)
 
-	if desired == nil {
-		return false
+	if err != nil {
+		return err
 	}
 
 	if index == 0 {
@@ -169,12 +172,12 @@ func (ll *LinkedList[T]) Insert(index int, value T) bool {
 	}
 
 	n := node.New(value)
-	prev := ll.GetByIndex(index - 1)
+	prev, _ := ll.GetByIndex(index - 1)
 	n.SetNext(prev.Next())
 	prev.SetNext(n)
 	ll.length++
 
-	return true
+	return nil
 }
 
 func (ll *LinkedList[T]) Reverse() {

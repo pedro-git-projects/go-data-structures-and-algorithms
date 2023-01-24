@@ -59,47 +59,43 @@ func TestString(t *testing.T) {
 
 func TestAppend(t *testing.T) {
 	l := linkedlist.New(1)
-	app := l.Append(2)
-	app = l.Append(3)
+	l.Append(2)
+	err := l.Append(3)
 	expected := 3
 
 	if l.Length() != expected {
 		t.Errorf("Expected %d but got %d", expected, l.Length())
 	}
 
-	if !app {
-		t.Errorf("Expected %t but got %t", true, false)
+	if err != nil {
+		t.Error(err)
 	}
-
 }
 
 func TestRemoveLastNonNil(t *testing.T) {
 	l := linkedlist.New(1)
-	rem := l.Append(2)
-	rem = l.Append(3)
-	rem = l.RemoveLast()
+	l.Append(2)
+	l.Append(3)
+	l.RemoveLast()
 	expected := 2
 
 	if l.Length() != expected {
 		t.Errorf("Expected %d but got %d", expected, l.Length())
 	}
 
-	if !rem {
-		t.Errorf("Expected %t but got %t", true, false)
-	}
 }
 
 func TestRemoveLastNil(t *testing.T) {
 	l := linkedlist.New(1)
-	rem := l.RemoveLast()
+	err := l.RemoveLast()
 	expected := 0
 
 	if l.Length() != expected {
 		t.Errorf("Expected %d but got %d", expected, l.Length())
 	}
 
-	if !rem {
-		t.Errorf("Expected %t but got %t", true, false)
+	if err != nil {
+		t.Error(err)
 	}
 
 	if l.Head() != nil || l.Tail() != nil {
@@ -110,15 +106,15 @@ func TestRemoveLastNil(t *testing.T) {
 
 func TestPrepend(t *testing.T) {
 	l := linkedlist.New(1)
-	b := l.Prepend(0)
+	err := l.Prepend(0)
 	expected := 2
 
 	if l.Length() != expected {
 		t.Errorf("Expected %d but got %d", expected, l.Length())
 	}
 
-	if !b {
-		t.Errorf("Expected %t but got %t", true, false)
+	if err != nil {
+		t.Error(err)
 	}
 
 }
@@ -126,53 +122,50 @@ func TestPrepend(t *testing.T) {
 func TestPrependEmpty(t *testing.T) {
 	l := linkedlist.New(1)
 	l.RemoveLast()
-	b := l.Prepend(0)
+	err := l.Prepend(0)
 	expected := 1
 
 	if l.Length() != expected {
 		t.Errorf("Expected %d but got %d", expected, l.Length())
 	}
 
-	if !b {
-		t.Errorf("Expected %t but got %t", true, false)
+	if err != nil {
+		t.Error(err)
 	}
 
-	if l.GetByIndex(0).Next() != nil {
-		t.Errorf("Expected %v but got %v", nil, l.GetByIndex(0).Next())
-	}
-
-	if l.GetByIndex(0).Value() != 0 {
-		t.Errorf("Expected %v but got %v", 0, l.GetByIndex(0).Value())
+	_, err = l.GetByIndex(0)
+	if err != nil {
+		t.Error(err)
 	}
 
 }
 
 func TestRemoveOnly(t *testing.T) {
 	l := linkedlist.New(1)
-	b := l.RemoveFirst()
+	err := l.RemoveFirst()
 	expected := 0
 
 	if l.Length() != expected {
 		t.Errorf("Expected %d but got %d", expected, l.Length())
 	}
 
-	if !b {
-		t.Errorf("Expected %t but got %t", true, false)
+	if err != nil {
+		t.Error(err)
 	}
 }
 
 func TestRemoveFirst(t *testing.T) {
 	l := linkedlist.New(1)
 	l.Append(2)
-	b := l.RemoveFirst()
+	err := l.RemoveFirst()
 	expected := 1
 
 	if l.Length() != expected {
 		t.Errorf("Expected %d but got %d", expected, l.Length())
 	}
 
-	if !b {
-		t.Errorf("Expected %t but got %t", true, false)
+	if err != nil {
+		t.Error(err)
 	}
 }
 
@@ -182,14 +175,14 @@ func TestGetByIndex(t *testing.T) {
 	l.Prepend(0)
 	l.Append(3)
 
-	result := l.GetByIndex(0)
+	result, _ := l.GetByIndex(0)
 	expected := 0
 
 	if result.Value() != expected {
 		t.Errorf("Expected %d but got %d", expected, result.Value())
 	}
 
-	result = l.GetByIndex(2)
+	result, _ = l.GetByIndex(2)
 	expected = 2
 
 	if result.Value() != expected {
@@ -201,7 +194,7 @@ func TestSet(t *testing.T) {
 	l := linkedlist.New(1)
 	l.Append(2)
 	l.Set(1, 0)
-	got := l.GetByIndex(1)
+	got, _ := l.GetByIndex(1)
 	expected := 0
 
 	if got.Value() != expected {
@@ -220,19 +213,19 @@ func TestRemove(t *testing.T) {
 	l := linkedlist.New(1)
 	l.Append(2)
 	l.Append(3)
-	b4 := l.GetByIndex(3)
+	b4, _ := l.GetByIndex(3)
 	l.Append(4)
 	l.Prepend(0)
 
-	b := l.Remove(3)
-	after := l.GetByIndex(3)
+	err := l.Remove(3)
+	after, _ := l.GetByIndex(3)
 
 	if b4 == after {
 		t.Errorf("Expected %v but got %v", b4, after)
 	}
 
-	if !b {
-		t.Error("Expected true, but got false")
+	if err != nil {
+		t.Error(err)
 	}
 }
 
@@ -243,7 +236,8 @@ func TestInsert(t *testing.T) {
 	l.Append(3)
 
 	l.Insert(2, 9)
-	got := l.GetByIndex(2).Value()
+	val, _ := l.GetByIndex(2)
+	got := val.Value()
 
 	expected := 9
 
@@ -270,13 +264,15 @@ func TestReverse(t *testing.T) {
 
 	var original []int
 	for i := 0; i < l.Length(); i++ {
-		original = append(original, l.GetByIndex(i).Value())
+		n, _ := l.GetByIndex(i)
+		original = append(original, n.Value())
 	}
 
 	l.Reverse()
 	var reversed []int
 	for i := 0; i < l.Length(); i++ {
-		reversed = append(reversed, l.GetByIndex(i).Value())
+		n, _ := l.GetByIndex(i)
+		reversed = append(reversed, n.Value())
 	}
 
 	expected := []int{
@@ -290,5 +286,4 @@ func TestReverse(t *testing.T) {
 	if reflect.DeepEqual(original, reversed) {
 		t.Errorf("Expected %v but got %v", expected, reversed)
 	}
-
 }

@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	"github.com/pedro-git-projects/go-data-structures-and-algorithms/src/dnode"
+	"github.com/pedro-git-projects/go-data-structures-and-algorithms/src/errs"
 )
 
 type DLinkedList[T any] struct {
@@ -45,7 +46,7 @@ func (dl DLinkedList[T]) String() string {
 	return acc
 }
 
-func (dl *DLinkedList[T]) Append(value T) bool {
+func (dl *DLinkedList[T]) Append(value T) error {
 	n := dnode.New(value)
 	if dl.head == nil {
 		dl.head = n
@@ -56,10 +57,10 @@ func (dl *DLinkedList[T]) Append(value T) bool {
 		dl.tail = n
 	}
 	dl.length++
-	return true
+	return nil
 }
 
-func (dl *DLinkedList[T]) Prepend(value T) bool {
+func (dl *DLinkedList[T]) Prepend(value T) error {
 	n := dnode.New(value)
 	if dl.length == 0 {
 		dl.head = n
@@ -70,12 +71,12 @@ func (dl *DLinkedList[T]) Prepend(value T) bool {
 		dl.head = n
 	}
 	dl.length++
-	return true
+	return nil
 }
 
-func (dl *DLinkedList[T]) RemoveFirst() bool {
+func (dl *DLinkedList[T]) RemoveFirst() error {
 	if dl.length == 0 {
-		return false
+		return errs.OpOnZeroLen("remove first in", "list")
 	}
 
 	desired := dl.head
@@ -89,12 +90,12 @@ func (dl *DLinkedList[T]) RemoveFirst() bool {
 		desired.SetNext(nil)
 	}
 	dl.length--
-	return true
+	return nil
 }
 
-func (dl *DLinkedList[T]) RemoveLast() bool {
+func (dl *DLinkedList[T]) RemoveLast() error {
 	if dl.length == 0 {
-		return false
+		return errs.OpOnZeroLen("remove last in", "list")
 	}
 
 	desired := dl.tail
@@ -108,12 +109,12 @@ func (dl *DLinkedList[T]) RemoveLast() bool {
 		desired.SetPrev(nil)
 	}
 	dl.length--
-	return true
+	return nil
 }
 
-func (dl *DLinkedList[T]) Get(index int) *dnode.DNode[T] {
+func (dl *DLinkedList[T]) Get(index int) (*dnode.DNode[T], error) {
 	if index < 0 || index >= dl.length {
-		return nil
+		return nil, errs.OutOfBounds
 	}
 
 	desired := dl.head
@@ -128,22 +129,22 @@ func (dl *DLinkedList[T]) Get(index int) *dnode.DNode[T] {
 		}
 	}
 
-	return desired
+	return desired, nil
 }
 
-func (dl *DLinkedList[T]) Set(index int, value T) bool {
-	desired := dl.Get(index)
-	if desired != nil {
+func (dl *DLinkedList[T]) Set(index int, value T) error {
+	desired, err := dl.Get(index)
+	if err == nil {
 		desired.SetValue(value)
-		return true
+		return nil
 	}
-	return false
+	return err
 }
 
-func (dl *DLinkedList[T]) Insert(index int, value T) bool {
-	desired := dl.Get(index)
-	if desired == nil {
-		return false
+func (dl *DLinkedList[T]) Insert(index int, value T) error {
+	_, err := dl.Get(index)
+	if err != nil {
+		return err
 	}
 
 	if index == 0 {
@@ -155,7 +156,7 @@ func (dl *DLinkedList[T]) Insert(index int, value T) bool {
 	}
 
 	n := dnode.New(value)
-	before := dl.Get(index - 1)
+	before, _ := dl.Get(index - 1)
 	after := before.Next()
 
 	n.SetPrev(before)
@@ -163,13 +164,13 @@ func (dl *DLinkedList[T]) Insert(index int, value T) bool {
 	before.SetNext(n)
 	after.SetPrev(n)
 	dl.length++
-	return true
+	return nil
 }
 
-func (dl *DLinkedList[T]) Remove(index int) bool {
-	desired := dl.Get(index)
-	if desired == nil {
-		return false
+func (dl *DLinkedList[T]) Remove(index int) error {
+	desired, err := dl.Get(index)
+	if err != nil {
+		return err
 	}
 
 	if index == 0 {
@@ -186,5 +187,5 @@ func (dl *DLinkedList[T]) Remove(index int) bool {
 	desired.SetPrev(nil)
 	dl.length--
 
-	return true
+	return nil
 }
