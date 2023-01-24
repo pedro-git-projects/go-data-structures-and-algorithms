@@ -7,6 +7,8 @@ import (
 	"github.com/pedro-git-projects/go-data-structures-and-algorithms/src/node"
 )
 
+// TODO remove return values from functions that can't return errors
+
 type LinkedList[T any] struct {
 	head   *node.Node[T]
 	tail   *node.Node[T]
@@ -46,7 +48,7 @@ func (ll LinkedList[T]) String() string {
 	return acc
 }
 
-func (ll *LinkedList[T]) Append(value T) error {
+func (ll *LinkedList[T]) Append(value T) {
 	n := node.New(value)
 	if ll.length == 0 {
 		ll.head = n
@@ -56,7 +58,6 @@ func (ll *LinkedList[T]) Append(value T) error {
 		ll.tail = n
 	}
 	ll.length++
-	return nil
 }
 
 func (ll *LinkedList[T]) RemoveLast() error {
@@ -83,7 +84,7 @@ func (ll *LinkedList[T]) RemoveLast() error {
 	return nil
 }
 
-func (ll *LinkedList[T]) Prepend(value T) error {
+func (ll *LinkedList[T]) Prepend(value T) {
 	n := node.New(value)
 	if ll.head != nil {
 		n.SetNext(ll.head)
@@ -93,7 +94,6 @@ func (ll *LinkedList[T]) Prepend(value T) error {
 		ll.tail = n
 	}
 	ll.length++
-	return nil
 }
 
 func (ll *LinkedList[T]) RemoveFirst() error {
@@ -164,11 +164,13 @@ func (ll *LinkedList[T]) Insert(index int, value T) error {
 	}
 
 	if index == 0 {
-		return ll.Prepend(value)
+		ll.Prepend(value)
+		return nil
 	}
 
 	if index == ll.length {
-		return ll.Append(value)
+		ll.Append(value)
+		return nil
 	}
 
 	n := node.New(value)

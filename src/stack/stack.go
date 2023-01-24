@@ -40,4 +40,8 @@ func (s Stack[T]) String() string {
 }
 
 func (s Stack[T]) Push(value T) {
+	n := node.New(value)
+	n.SetNext(s.top)
+	s.top = n
+	s.height++
 }

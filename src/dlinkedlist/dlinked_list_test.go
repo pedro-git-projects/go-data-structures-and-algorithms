@@ -70,15 +70,11 @@ func TestString(t *testing.T) {
 func TestAppend(t *testing.T) {
 	l := dlinkedlist.New(1)
 	l.Append(2)
-	err := l.Append(3)
+	l.Append(3)
 	expected := 3
 
 	if l.Length() != expected {
 		t.Errorf("Expected %d but got %d", expected, l.Length())
-	}
-
-	if err != nil {
-		t.Error(err)
 	}
 }
 

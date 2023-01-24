@@ -60,15 +60,11 @@ func TestString(t *testing.T) {
 func TestAppend(t *testing.T) {
 	l := linkedlist.New(1)
 	l.Append(2)
-	err := l.Append(3)
+	l.Append(3)
 	expected := 3
 
 	if l.Length() != expected {
 		t.Errorf("Expected %d but got %d", expected, l.Length())
-	}
-
-	if err != nil {
-		t.Error(err)
 	}
 }
 
@@ -106,38 +102,28 @@ func TestRemoveLastNil(t *testing.T) {
 
 func TestPrepend(t *testing.T) {
 	l := linkedlist.New(1)
-	err := l.Prepend(0)
+	l.Prepend(0)
 	expected := 2
 
 	if l.Length() != expected {
 		t.Errorf("Expected %d but got %d", expected, l.Length())
 	}
-
-	if err != nil {
-		t.Error(err)
-	}
-
 }
 
 func TestPrependEmpty(t *testing.T) {
 	l := linkedlist.New(1)
 	l.RemoveLast()
-	err := l.Prepend(0)
+	l.Prepend(0)
 	expected := 1
 
 	if l.Length() != expected {
 		t.Errorf("Expected %d but got %d", expected, l.Length())
 	}
 
+	_, err := l.GetByIndex(0)
 	if err != nil {
 		t.Error(err)
 	}
-
-	_, err = l.GetByIndex(0)
-	if err != nil {
-		t.Error(err)
-	}
-
 }
 
 func TestRemoveOnly(t *testing.T) {

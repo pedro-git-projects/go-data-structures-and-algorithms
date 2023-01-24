@@ -46,7 +46,7 @@ func (dl DLinkedList[T]) String() string {
 	return acc
 }
 
-func (dl *DLinkedList[T]) Append(value T) error {
+func (dl *DLinkedList[T]) Append(value T) {
 	n := dnode.New(value)
 	if dl.head == nil {
 		dl.head = n
@@ -57,10 +57,9 @@ func (dl *DLinkedList[T]) Append(value T) error {
 		dl.tail = n
 	}
 	dl.length++
-	return nil
 }
 
-func (dl *DLinkedList[T]) Prepend(value T) error {
+func (dl *DLinkedList[T]) Prepend(value T) {
 	n := dnode.New(value)
 	if dl.length == 0 {
 		dl.head = n
@@ -71,7 +70,6 @@ func (dl *DLinkedList[T]) Prepend(value T) error {
 		dl.head = n
 	}
 	dl.length++
-	return nil
 }
 
 func (dl *DLinkedList[T]) RemoveFirst() error {
@@ -148,11 +146,13 @@ func (dl *DLinkedList[T]) Insert(index int, value T) error {
 	}
 
 	if index == 0 {
-		return dl.Prepend(value)
+		dl.Prepend(value)
+		return nil
 	}
 
 	if index == dl.length {
-		return dl.Append(value)
+		dl.Append(value)
+		return nil
 	}
 
 	n := dnode.New(value)
