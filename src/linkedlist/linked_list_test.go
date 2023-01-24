@@ -147,7 +147,7 @@ func TestPrependEmpty(t *testing.T) {
 
 }
 
-dfunc TestRemoveOnly(t *testing.T) {
+func TestRemoveOnly(t *testing.T) {
 	l := linkedlist.New(1)
 	b := l.RemoveFirst()
 	expected := 0

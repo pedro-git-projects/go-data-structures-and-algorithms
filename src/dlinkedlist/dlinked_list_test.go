@@ -178,3 +178,46 @@ func TestSet(t *testing.T) {
 		t.Errorf("Expected %d but got %d", expected, length)
 	}
 }
+
+func TestInsert(t *testing.T) {
+	l := dlinkedlist.New(1)
+	l.Append(2)
+	l.Prepend(0)
+	l.Append(3)
+
+	l.Insert(2, 9)
+	got := l.Get(2).Value()
+
+	expected := 9
+
+	if got != expected {
+		t.Errorf("Expected %d but got %d", expected, got)
+	}
+
+	expected = 5
+	length := l.Length()
+
+	if length != expected {
+		t.Errorf("Expected %d but got %d", expected, length)
+	}
+}
+
+func TestRemove(t *testing.T) {
+	l := dlinkedlist.New(1)
+	l.Append(2)
+	l.Append(3)
+	b4 := l.Get(3)
+	l.Append(4)
+	l.Prepend(0)
+
+	b := l.Remove(3)
+	after := l.Get(3)
+
+	if b4 == after {
+		t.Errorf("Expected %v but got %v", b4, after)
+	}
+
+	if !b {
+		t.Error("Expected true, but got false")
+	}
+}

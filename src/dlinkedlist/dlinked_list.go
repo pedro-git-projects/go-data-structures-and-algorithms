@@ -139,3 +139,52 @@ func (dl *DLinkedList[T]) Set(index int, value T) bool {
 	}
 	return false
 }
+
+func (dl *DLinkedList[T]) Insert(index int, value T) bool {
+	desired := dl.Get(index)
+	if desired == nil {
+		return false
+	}
+
+	if index == 0 {
+		return dl.Prepend(value)
+	}
+
+	if index == dl.length {
+		return dl.Append(value)
+	}
+
+	n := dnode.New(value)
+	before := dl.Get(index - 1)
+	after := before.Next()
+
+	n.SetPrev(before)
+	n.SetNext(after)
+	before.SetNext(n)
+	after.SetPrev(n)
+	dl.length++
+	return true
+}
+
+func (dl *DLinkedList[T]) Remove(index int) bool {
+	desired := dl.Get(index)
+	if desired == nil {
+		return false
+	}
+
+	if index == 0 {
+		return dl.RemoveFirst()
+	}
+
+	if index == dl.length-1 {
+		return dl.RemoveLast()
+	}
+
+	desired.Next().SetPrev(desired.Prev())
+	desired.Prev().SetNext(desired.Next())
+	desired.SetNext(nil)
+	desired.SetPrev(nil)
+	dl.length--
+
+	return true
+}
