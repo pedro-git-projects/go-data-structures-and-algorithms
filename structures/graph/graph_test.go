@@ -3,7 +3,7 @@ package graph_test
 import (
 	"testing"
 
-	"github.com/pedro-git-projects/go-data-structures-and-algorithms/src/graph"
+	"github.com/pedro-git-projects/go-data-structures-and-algorithms/structures/graph"
 )
 
 func TestAddVertex(t *testing.T) {

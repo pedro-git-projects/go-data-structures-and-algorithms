@@ -1,14 +1,14 @@
-package linkedlist_test
+package dlinkedlist_test
 
 import (
 	"reflect"
 	"testing"
 
-	"github.com/pedro-git-projects/go-data-structures-and-algorithms/src/linkedlist"
+	"github.com/pedro-git-projects/go-data-structures-and-algorithms/structures/dlinkedlist"
 )
 
 func TestGettersLen1(t *testing.T) {
-	l := linkedlist.New(2)
+	l := dlinkedlist.New(2)
 
 	head := l.Head()
 	if head.Value() != 2 {
@@ -27,7 +27,7 @@ func TestGettersLen1(t *testing.T) {
 }
 
 func TestGettersLenGte1(t *testing.T) {
-	l := linkedlist.New(2)
+	l := dlinkedlist.New(2)
 	l.Append(3)
 	l.Append(4)
 	l.Append(5)
@@ -37,9 +37,19 @@ func TestGettersLenGte1(t *testing.T) {
 		t.Errorf("Expected %d but got %v", 2, head.Value())
 	}
 
+	next := l.Head().Next()
+	if next.Value() != 3 {
+		t.Errorf("Expected %d but got %v", 3, next.Value())
+	}
+
 	tail := l.Tail()
 	if tail.Value() != 5 {
 		t.Errorf("Expected %d but got %v", 5, tail.Value())
+	}
+
+	prev := l.Tail().Prev()
+	if prev.Value() != 4 {
+		t.Errorf("Expected %d but got %v", 4, prev.Value())
 	}
 
 	length := l.Length()
@@ -50,7 +60,7 @@ func TestGettersLenGte1(t *testing.T) {
 
 func TestString(t *testing.T) {
 	v := []int{1, 2}
-	l := linkedlist.New(v)
+	l := dlinkedlist.New(v)
 	str := l.String()
 	if !reflect.DeepEqual(reflect.TypeOf(str), reflect.TypeOf(*new(string))) {
 		t.Errorf("Expected type string, but got %T", str)
@@ -58,7 +68,7 @@ func TestString(t *testing.T) {
 }
 
 func TestAppend(t *testing.T) {
-	l := linkedlist.New(1)
+	l := dlinkedlist.New(1)
 	l.Append(2)
 	l.Append(3)
 	expected := 3
@@ -69,20 +79,23 @@ func TestAppend(t *testing.T) {
 }
 
 func TestRemoveLastNonNil(t *testing.T) {
-	l := linkedlist.New(1)
+	l := dlinkedlist.New(1)
 	l.Append(2)
 	l.Append(3)
-	l.RemoveLast()
+	err := l.RemoveLast()
 	expected := 2
 
 	if l.Length() != expected {
 		t.Errorf("Expected %d but got %d", expected, l.Length())
 	}
 
+	if err != nil {
+		t.Error(err)
+	}
 }
 
 func TestRemoveLastNil(t *testing.T) {
-	l := linkedlist.New(1)
+	l := dlinkedlist.New(1)
 	err := l.RemoveLast()
 	expected := 0
 
@@ -100,34 +113,8 @@ func TestRemoveLastNil(t *testing.T) {
 	}
 }
 
-func TestPrepend(t *testing.T) {
-	l := linkedlist.New(1)
-	l.Prepend(0)
-	expected := 2
-
-	if l.Length() != expected {
-		t.Errorf("Expected %d but got %d", expected, l.Length())
-	}
-}
-
-func TestPrependEmpty(t *testing.T) {
-	l := linkedlist.New(1)
-	l.RemoveLast()
-	l.Prepend(0)
-	expected := 1
-
-	if l.Length() != expected {
-		t.Errorf("Expected %d but got %d", expected, l.Length())
-	}
-
-	_, err := l.GetByIndex(0)
-	if err != nil {
-		t.Error(err)
-	}
-}
-
 func TestRemoveOnly(t *testing.T) {
-	l := linkedlist.New(1)
+	l := dlinkedlist.New(1)
 	err := l.RemoveFirst()
 	expected := 0
 
@@ -141,7 +128,7 @@ func TestRemoveOnly(t *testing.T) {
 }
 
 func TestRemoveFirst(t *testing.T) {
-	l := linkedlist.New(1)
+	l := dlinkedlist.New(1)
 	l.Append(2)
 	err := l.RemoveFirst()
 	expected := 1
@@ -155,21 +142,14 @@ func TestRemoveFirst(t *testing.T) {
 	}
 }
 
-func TestGetByIndex(t *testing.T) {
-	l := linkedlist.New(1)
+func TestGet(t *testing.T) {
+	l := dlinkedlist.New(1)
 	l.Append(2)
 	l.Prepend(0)
 	l.Append(3)
 
-	result, _ := l.GetByIndex(0)
+	result, _ := l.Get(0)
 	expected := 0
-
-	if result.Value() != expected {
-		t.Errorf("Expected %d but got %d", expected, result.Value())
-	}
-
-	result, _ = l.GetByIndex(2)
-	expected = 2
 
 	if result.Value() != expected {
 		t.Errorf("Expected %d but got %d", expected, result.Value())
@@ -177,10 +157,10 @@ func TestGetByIndex(t *testing.T) {
 }
 
 func TestSet(t *testing.T) {
-	l := linkedlist.New(1)
+	l := dlinkedlist.New(1)
 	l.Append(2)
 	l.Set(1, 0)
-	got, _ := l.GetByIndex(1)
+	got, _ := l.Get(1)
 	expected := 0
 
 	if got.Value() != expected {
@@ -195,35 +175,15 @@ func TestSet(t *testing.T) {
 	}
 }
 
-func TestRemove(t *testing.T) {
-	l := linkedlist.New(1)
-	l.Append(2)
-	l.Append(3)
-	b4, _ := l.GetByIndex(3)
-	l.Append(4)
-	l.Prepend(0)
-
-	err := l.Remove(3)
-	after, _ := l.GetByIndex(3)
-
-	if b4 == after {
-		t.Errorf("Expected %v but got %v", b4, after)
-	}
-
-	if err != nil {
-		t.Error(err)
-	}
-}
-
 func TestInsert(t *testing.T) {
-	l := linkedlist.New(1)
+	l := dlinkedlist.New(1)
 	l.Append(2)
 	l.Prepend(0)
 	l.Append(3)
 
 	l.Insert(2, 9)
-	val, _ := l.GetByIndex(2)
-	got := val.Value()
+	v, _ := l.Get(2)
+	got := v.Value()
 
 	expected := 9
 
@@ -239,37 +199,22 @@ func TestInsert(t *testing.T) {
 	}
 }
 
-func TestReverse(t *testing.T) {
-	l := linkedlist.New(1)
+func TestRemove(t *testing.T) {
+	l := dlinkedlist.New(1)
 	l.Append(2)
 	l.Append(3)
+	b4, _ := l.Get(3)
 	l.Append(4)
-	l.Append(5)
-	l.Append(6)
-	l.Append(7)
+	l.Prepend(0)
 
-	var original []int
-	for i := 0; i < l.Length(); i++ {
-		n, _ := l.GetByIndex(i)
-		original = append(original, n.Value())
+	err := l.Remove(3)
+	after, _ := l.Get(3)
+
+	if b4 == after {
+		t.Errorf("Expected %v but got %v", b4, after)
 	}
 
-	l.Reverse()
-	var reversed []int
-	for i := 0; i < l.Length(); i++ {
-		n, _ := l.GetByIndex(i)
-		reversed = append(reversed, n.Value())
-	}
-
-	expected := []int{
-		7, 6, 5, 4, 3, 2, 1,
-	}
-
-	if !reflect.DeepEqual(expected, reversed) {
-		t.Errorf("Expected %v but got %v", expected, reversed)
-	}
-
-	if reflect.DeepEqual(original, reversed) {
-		t.Errorf("Expected %v but got %v", expected, reversed)
+	if err != nil {
+		t.Error(err)
 	}
 }

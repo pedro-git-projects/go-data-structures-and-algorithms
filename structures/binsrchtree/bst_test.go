@@ -3,7 +3,7 @@ package binsrchtree_test
 import (
 	"testing"
 
-	"github.com/pedro-git-projects/go-data-structures-and-algorithms/src/binsrchtree"
+	"github.com/pedro-git-projects/go-data-structures-and-algorithms/structures/binsrchtree"
 )
 
 func TestInsert(t *testing.T) {

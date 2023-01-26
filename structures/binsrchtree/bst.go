@@ -3,8 +3,8 @@ package binsrchtree
 import (
 	"reflect"
 
-	"github.com/pedro-git-projects/go-data-structures-and-algorithms/src/bnode"
-	"github.com/pedro-git-projects/go-data-structures-and-algorithms/src/errs"
+	"github.com/pedro-git-projects/go-data-structures-and-algorithms/structures/bnode"
+	"github.com/pedro-git-projects/go-data-structures-and-algorithms/structures/errs"
 	"golang.org/x/exp/constraints"
 )
 

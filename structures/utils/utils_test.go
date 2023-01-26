@@ -3,7 +3,7 @@ package utils_test
 import (
 	"testing"
 
-	"github.com/pedro-git-projects/go-data-structures-and-algorithms/src/utils"
+	"github.com/pedro-git-projects/go-data-structures-and-algorithms/structures/utils"
 )
 
 func TestCommutativeSliceComparison(t *testing.T) {

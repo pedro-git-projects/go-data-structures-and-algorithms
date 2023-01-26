@@ -3,8 +3,8 @@ package dlinkedlist
 import (
 	"fmt"
 
-	"github.com/pedro-git-projects/go-data-structures-and-algorithms/src/dnode"
-	"github.com/pedro-git-projects/go-data-structures-and-algorithms/src/errs"
+	"github.com/pedro-git-projects/go-data-structures-and-algorithms/structures/dnode"
+	"github.com/pedro-git-projects/go-data-structures-and-algorithms/structures/errs"
 )
 
 type DLinkedList[T any] struct {

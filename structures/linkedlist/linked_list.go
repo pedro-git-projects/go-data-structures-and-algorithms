@@ -3,8 +3,8 @@ package linkedlist
 import (
 	"fmt"
 
-	"github.com/pedro-git-projects/go-data-structures-and-algorithms/src/errs"
-	"github.com/pedro-git-projects/go-data-structures-and-algorithms/src/node"
+	"github.com/pedro-git-projects/go-data-structures-and-algorithms/structures/errs"
+	"github.com/pedro-git-projects/go-data-structures-and-algorithms/structures/node"
 )
 
 // TODO remove return values from functions that can't return errors

@@ -5,8 +5,8 @@ import (
 	"hash/fnv"
 	"reflect"
 
-	"github.com/pedro-git-projects/go-data-structures-and-algorithms/src/errs"
-	"github.com/pedro-git-projects/go-data-structures-and-algorithms/src/hnode"
+	"github.com/pedro-git-projects/go-data-structures-and-algorithms/structures/errs"
+	"github.com/pedro-git-projects/go-data-structures-and-algorithms/structures/hnode"
 )
 
 // TODO: Reimplement with slice for variable hashtable size

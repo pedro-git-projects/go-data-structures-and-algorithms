@@ -3,7 +3,7 @@ package queue_test
 import (
 	"testing"
 
-	"github.com/pedro-git-projects/go-data-structures-and-algorithms/src/queue"
+	"github.com/pedro-git-projects/go-data-structures-and-algorithms/structures/queue"
 )
 
 func TestEnqueue(t *testing.T) {

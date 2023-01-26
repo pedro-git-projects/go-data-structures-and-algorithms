@@ -3,7 +3,7 @@ package stack_test
 import (
 	"testing"
 
-	"github.com/pedro-git-projects/go-data-structures-and-algorithms/src/stack"
+	"github.com/pedro-git-projects/go-data-structures-and-algorithms/structures/stack"
 )
 
 func TestPush(t *testing.T) {

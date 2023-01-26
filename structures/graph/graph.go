@@ -3,8 +3,8 @@ package graph
 import (
 	"fmt"
 
-	"github.com/pedro-git-projects/go-data-structures-and-algorithms/src/errs"
-	"github.com/pedro-git-projects/go-data-structures-and-algorithms/src/set"
+	"github.com/pedro-git-projects/go-data-structures-and-algorithms/structures/errs"
+	"github.com/pedro-git-projects/go-data-structures-and-algorithms/structures/set"
 )
 
 type Graph[T comparable] struct {

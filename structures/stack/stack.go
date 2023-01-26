@@ -3,8 +3,8 @@ package stack
 import (
 	"fmt"
 
-	"github.com/pedro-git-projects/go-data-structures-and-algorithms/src/errs"
-	"github.com/pedro-git-projects/go-data-structures-and-algorithms/src/item"
+	"github.com/pedro-git-projects/go-data-structures-and-algorithms/structures/errs"
+	"github.com/pedro-git-projects/go-data-structures-and-algorithms/structures/item"
 )
 
 type Stack[T any] struct {

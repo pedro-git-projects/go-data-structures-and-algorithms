@@ -17,7 +17,7 @@
 
 ### Node
 
-[Code](https://github.com/pedro-git-projects/go-data-structures-and-algorithms/tree/master/src/node)
+[Code](https://github.com/pedro-git-projects/go-data-structures-and-algorithms/tree/master/structures/node)
 
 ```go
 package node
@@ -32,7 +32,7 @@ type Node[T any] struct {
 
 ### Linked List
 
-[Code](https://github.com/pedro-git-projects/go-data-structures-and-algorithms/tree/master/src/linkedlist)
+[Code](https://github.com/pedro-git-projects/go-data-structures-and-algorithms/tree/master/structures/linkedlist)
 
 ```go
 type LinkedList[T any] struct {
@@ -44,7 +44,7 @@ type LinkedList[T any] struct {
 
 ### Two Pointer Node
 
-[Code](https://github.com/pedro-git-projects/go-data-structures-and-algorithms/tree/master/src/dnode)
+[Code](https://github.com/pedro-git-projects/go-data-structures-and-algorithms/tree/master/structures/dnode)
 
 ```go
 type DNode[T any] struct {
@@ -56,7 +56,7 @@ type DNode[T any] struct {
 
 ### Doubly Linked List
 
-[Code](https://github.com/pedro-git-projects/go-data-structures-and-algorithms/tree/master/src/dlinkedlist)
+[Code](https://github.com/pedro-git-projects/go-data-structures-and-algorithms/tree/master/structures/dlinkedlist)
 
 ```go
 type DLinkedList[T any] struct {
@@ -68,7 +68,7 @@ type DLinkedList[T any] struct {
 
 ### Item
 
-[Code](https://github.com/pedro-git-projects/go-data-structures-and-algorithms/tree/master/src/item)
+[Code](https://github.com/pedro-git-projects/go-data-structures-and-algorithms/tree/master/structures/item)
 
 ```go
 type Item[T any] struct {
@@ -79,7 +79,7 @@ type Item[T any] struct {
 
 ### Stack
 
-[Code](https://github.com/pedro-git-projects/go-data-structures-and-algorithms/tree/master/src/stack)
+[Code](https://github.com/pedro-git-projects/go-data-structures-and-algorithms/tree/master/structures/stack)
 
 ```go
 type Stack[T any] struct {
@@ -90,7 +90,7 @@ type Stack[T any] struct {
 
 ### Queue 
 
-[Code](https://github.com/pedro-git-projects/go-data-structures-and-algorithms/tree/master/src/queue)
+[Code](https://github.com/pedro-git-projects/go-data-structures-and-algorithms/tree/master/structures/queue)
 
 ```go
 type Queue[T any] struct {
@@ -102,7 +102,7 @@ type Queue[T any] struct {
 
 ### Binary Node 
 
-[Code](https://github.com/pedro-git-projects/go-data-structures-and-algorithms/tree/master/src/bnode)
+[Code](https://github.com/pedro-git-projects/go-data-structures-and-algorithms/tree/master/structures/bnode)
 
 ```go
 type BNode[T constraints.Ordered] struct {
@@ -113,7 +113,7 @@ type BNode[T constraints.Ordered] struct {
 ```
 ### Binary Search Tree 
 
-[Code](https://github.com/pedro-git-projects/go-data-structures-and-algorithms/tree/master/src/binsrchtree)
+[Code](https://github.com/pedro-git-projects/go-data-structures-and-algorithms/tree/master/structures/binsrchtree)
 
 ```go
 type BST[T constraints.Ordered] struct {
@@ -123,7 +123,7 @@ type BST[T constraints.Ordered] struct {
 
 ### Hash Node 
 
-[Code](https://github.com/pedro-git-projects/go-data-structures-and-algorithms/tree/master/src/hnode)
+[Code](https://github.com/pedro-git-projects/go-data-structures-and-algorithms/tree/master/structures/hnode)
 
 ```go
 type HNode[T any] struct {
@@ -134,7 +134,7 @@ type HNode[T any] struct {
 ```
 ### Hash Table 
 
-[Code](https://github.com/pedro-git-projects/go-data-structures-and-algorithms/tree/master/src/hashtable)
+[Code](https://github.com/pedro-git-projects/go-data-structures-and-algorithms/tree/master/structures/hashtable)
 
 ```go
 const defaultCapacity uint64 = 1 << 10
@@ -146,7 +146,7 @@ type HashTable[T any] struct {
 ```
 ### Set 
 
-[Code](https://github.com/pedro-git-projects/go-data-structures-and-algorithms/tree/master/src/set)
+[Code](https://github.com/pedro-git-projects/go-data-structures-and-algorithms/tree/master/structures/set)
 
 ```go
 type Set[T comparable] interface {
@@ -170,12 +170,10 @@ type Set[T comparable] interface {
 
 ### Graph 
 
-[Code](https://github.com/pedro-git-projects/go-data-structures-and-algorithms/tree/master/src/graph)
+[Code](https://github.com/pedro-git-projects/go-data-structures-and-algorithms/tree/master/structures/graph)
 
 ```go
 type Graph[T comparable] struct {
 	adjacencyList map[T]set.Set[T]
 }
 ```
-
-

@@ -3,7 +3,7 @@ package hashtable
 import (
 	"testing"
 
-	"github.com/pedro-git-projects/go-data-structures-and-algorithms/src/utils"
+	"github.com/pedro-git-projects/go-data-structures-and-algorithms/structures/utils"
 )
 
 func TestAt(t *testing.T) {
