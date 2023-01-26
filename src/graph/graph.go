@@ -72,3 +72,20 @@ func (g *Graph[T]) RemoveEdge(v0, v1 T) error {
 	g.adjacencyList[v1].Erase(v0)
 	return nil
 }
+
+func (g *Graph[T]) RemoveVertex(v T) error {
+	_, present := g.adjacencyList[v]
+	if !present {
+		return errs.NonExistentVertex(v)
+	}
+
+	set := g.adjacencyList[v]
+	setSlice := set.ToSlice()
+
+	for _, otherVertexes := range setSlice {
+		g.adjacencyList[otherVertexes].Erase(v)
+	}
+	delete(g.adjacencyList, v)
+
+	return nil
+}

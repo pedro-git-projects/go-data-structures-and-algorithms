@@ -52,3 +52,39 @@ func TestRemoveEdge(t *testing.T) {
 		t.Error("Expected an error but got none")
 	}
 }
+
+func TestRemoveVertex(t *testing.T) {
+	/*
+		A-------B
+		|\     |
+		| \    |
+		|  \   |
+		|   \  |
+		|    \ |
+		C------D
+	*/
+	g := graph.New("A")
+	g.AddVertex("B")
+	g.AddVertex("C")
+	g.AddVertex("D")
+	g.AddEdge("A", "B")
+	g.AddEdge("A", "C")
+	g.AddEdge("A", "D")
+	g.AddEdge("B", "D")
+	g.AddEdge("C", "D")
+	g.AddEdge("D", "A")
+	g.AddEdge("D", "B")
+	g.AddEdge("D", "C")
+
+	/*
+		A-------B
+		|
+		|
+		|
+		C
+	*/
+	err := g.RemoveVertex("D")
+	if err != nil {
+		t.Errorf("Expected nil but got %v", err)
+	}
+}
