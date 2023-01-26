@@ -136,7 +136,7 @@ func (s *set[T]) String() string {
 	for elem := range *s {
 		items = append(items, fmt.Sprintf("%v", elem))
 	}
-	return fmt.Sprintf("{%s}", strings.Join(items, ", "))
+	return fmt.Sprintf("%s", strings.Join(items, ", "))
 }
 
 func (s *set[T]) Union(other Set[T]) Set[T] {
@@ -155,4 +155,12 @@ func (s *set[T]) Union(other Set[T]) Set[T] {
 		unionedSet.insert(elem)
 	}
 	return &unionedSet
+}
+
+func (s *set[T]) ToSlice() []T {
+	keys := make([]T, 0, s.Cardinality())
+	for elem := range *s {
+		keys = append(keys, elem)
+	}
+	return keys
 }

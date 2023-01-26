@@ -15,6 +15,7 @@ type Set[T comparable] interface {
 	IsProperSuperset(Set[T]) bool
 	Union(Set[T]) Set[T]
 	String() string
+	ToSlice() []T
 }
 
 func New[T comparable](vals ...T) Set[T] {

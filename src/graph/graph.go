@@ -6,22 +6,25 @@ import (
 	"github.com/pedro-git-projects/go-data-structures-and-algorithms/src/set"
 )
 
-type Graph[T, U comparable] struct {
-	adjacencyList map[T]set.Set[U]
+type Graph[T comparable] struct {
+	adjacencyList map[T]set.Set[T]
 }
 
-func New[T, U comparable](vertexID T, vertexValue U) *Graph[T, U] {
-	m := make(map[T]set.Set[U])
-	s := set.New(vertexValue)
-	m[vertexID] = s
+func New[T comparable](vertexID T) *Graph[T] {
+	m := make(map[T]set.Set[T])
+	m[vertexID] = set.New[T]()
 	vertex := m
-	g := &Graph[T, U]{
+	g := &Graph[T]{
 		adjacencyList: vertex,
 	}
 	return g
 }
 
-func (g Graph[T, U]) String() string {
+func (g Graph[T]) AdjecencyList() map[T]set.Set[T] {
+	return g.adjacencyList
+}
+
+func (g Graph[T]) String() string {
 	var str string
 	for k, v := range g.adjacencyList {
 		str += fmt.Sprintf("%v: [ %v ]\n", k, v)
@@ -29,14 +32,24 @@ func (g Graph[T, U]) String() string {
 	return str
 }
 
-func (g *Graph[T, U]) AddVertex(vertex T) bool {
+func (g *Graph[T]) AddVertex(vertex T) bool {
 	_, ok := g.adjacencyList[vertex]
 	if !ok {
-		g.adjacencyList[vertex] = set.New[U]()
+		g.adjacencyList[vertex] = set.New[T]()
 		return true
 	}
 	return false
 }
 
-// func (g *Graph[T, U]) AddEdge(vertex0, vertex1 U) {
-// }
+func (g *Graph[T]) AddEdge(v0, v1 T) bool {
+	_, ok0 := g.adjacencyList[v0]
+	_, ok1 := g.adjacencyList[v1]
+
+	if ok0 && ok1 {
+		g.adjacencyList[v0].Insert(v1)
+		g.adjacencyList[v1].Insert(v0)
+		return true
+	}
+
+	return false
+}
