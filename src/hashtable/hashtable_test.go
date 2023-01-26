@@ -1,8 +1,9 @@
 package hashtable
 
 import (
-	"reflect"
 	"testing"
+
+	"github.com/pedro-git-projects/go-data-structures-and-algorithms/src/utils"
 )
 
 func TestAt(t *testing.T) {
@@ -29,7 +30,6 @@ func TestAt(t *testing.T) {
 	}
 }
 
-// TODO CommutativeSliceComparison
 func TestKeys(t *testing.T) {
 	hst := New[int]()
 	hst.Insert("p-bass", 1950)
@@ -42,7 +42,7 @@ func TestKeys(t *testing.T) {
 		"p-bass", "j-bass", "stingray", "dingwall",
 	}
 
-	if !reflect.DeepEqual(keys, expect) { // does not work because of order
+	if !utils.CommutativeSliceComparison(keys, expect) {
 		t.Errorf("Expected %v but got %v", expect, keys)
 	}
 
