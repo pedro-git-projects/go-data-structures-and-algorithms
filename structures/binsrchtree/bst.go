@@ -5,7 +5,7 @@ import (
 
 	"github.com/pedro-git-projects/go-data-structures-and-algorithms/structures/bnode"
 	"github.com/pedro-git-projects/go-data-structures-and-algorithms/structures/errs"
-	"golang.org/x/exp/constraints"
+	"github.com/pedro-git-projects/go-data-structures-and-algorithms/utils/constraints"
 )
 
 type BST[T constraints.Ordered] struct {

@@ -3,7 +3,7 @@ package hashtable
 import (
 	"testing"
 
-	"github.com/pedro-git-projects/go-data-structures-and-algorithms/structures/utils"
+	"github.com/pedro-git-projects/go-data-structures-and-algorithms/utils/comparison"
 )
 
 func TestAt(t *testing.T) {
@@ -42,7 +42,7 @@ func TestKeys(t *testing.T) {
 		"p-bass", "j-bass", "stingray", "dingwall",
 	}
 
-	if !utils.CommutativeSliceComparison(keys, expect) {
+	if !comparison.CommutativeSliceComparison(keys, expect) {
 		t.Errorf("Expected %v but got %v", expect, keys)
 	}
 

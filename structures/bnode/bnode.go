@@ -1,6 +1,6 @@
 package bnode
 
-import "golang.org/x/exp/constraints"
+import "github.com/pedro-git-projects/go-data-structures-and-algorithms/utils/constraints"
 
 type BNode[T constraints.Ordered] struct {
 	value T
