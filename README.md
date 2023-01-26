@@ -2,6 +2,10 @@
 
 ### Table of Contents  
 
+---
+
+#### Data Structures
+
 - [Linked List](#linked-list)
 - [Two Pointer Node](#two-pointer-node)
 - [Doubly Linked List](#doubly-linked-list)
@@ -14,6 +18,14 @@
 - [Hash Table](#hash-table)
 - [Set](#set)
 - [Graph](#graph)
+
+#### Algorithms
+
+- [Bubble Sort](#bubble-sort)
+- [Selection Sort](#selection-sort)
+- [Insertion Sort](#insertion-sort)
+
+	---
 
 ### Node
 
