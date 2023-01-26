@@ -10,6 +10,8 @@
 - [Queue](#queue)
 - [Binary Node](#binary-node)
 - [Binary Search Tree](#binary-search-tree)
+- [Hash Node](#hash-node)
+- [Hash Table](#hash-table)
 
 ### Node
 
@@ -116,4 +118,29 @@ type BST[T constraints.Ordered] struct {
 	root *bnode.BNode[T]
 }
 ```
+
+### Hash Node 
+
+[Code](https://github.com/pedro-git-projects/go-data-structures-and-algorithms/tree/master/src/hnode)
+
+```go
+type HNode[T any] struct {
+	key   any
+	value T
+	next  *HNode[T]
+}
+```
+### Hash Table 
+
+[Code](https://github.com/pedro-git-projects/go-data-structures-and-algorithms/tree/master/src/hashtable)
+
+```go
+const defaultCapacity uint64 = 1 << 10
+
+type HashTable[T any] struct {
+	capacity uint64
+	table    [defaultCapacity]*hnode.HNode[T]
+}
+```
+
 
