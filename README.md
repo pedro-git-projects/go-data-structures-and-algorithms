@@ -12,6 +12,8 @@
 - [Binary Search Tree](#binary-search-tree)
 - [Hash Node](#hash-node)
 - [Hash Table](#hash-table)
+- [Set](#set)
+- [Graph](#graph)
 
 ### Node
 
@@ -140,6 +142,39 @@ const defaultCapacity uint64 = 1 << 10
 type HashTable[T any] struct {
 	capacity uint64
 	table    [defaultCapacity]*hnode.HNode[T]
+}
+```
+### Set 
+
+[Code](https://github.com/pedro-git-projects/go-data-structures-and-algorithms/tree/master/src/set)
+
+```go
+type Set[T comparable] interface {
+	Insert(el T) bool
+	Erase(el T)
+	Cardinality() int
+	Clear()
+	Contains(el ...T) bool
+	Difference(Set[T]) Set[T]
+	Equals(Set[T]) bool
+	Intersection(Set[T]) Set[T]
+	IsSubset(Set[T]) bool
+	IsProperSubset(Set[T]) bool
+	IsSuperset(Set[T]) bool
+	IsProperSuperset(Set[T]) bool
+	Union(Set[T]) Set[T]
+	String() string
+	ToSlice() []T
+}
+```
+
+### Graph 
+
+[Code](https://github.com/pedro-git-projects/go-data-structures-and-algorithms/tree/master/src/graph)
+
+```go
+type Graph[T comparable] struct {
+	adjacencyList map[T]set.Set[T]
 }
 ```
 
