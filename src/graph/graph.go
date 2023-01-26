@@ -3,6 +3,7 @@ package graph
 import (
 	"fmt"
 
+	"github.com/pedro-git-projects/go-data-structures-and-algorithms/src/errs"
 	"github.com/pedro-git-projects/go-data-structures-and-algorithms/src/set"
 )
 
@@ -32,24 +33,42 @@ func (g Graph[T]) String() string {
 	return str
 }
 
-func (g *Graph[T]) AddVertex(vertex T) bool {
-	_, ok := g.adjacencyList[vertex]
-	if !ok {
+func (g *Graph[T]) AddVertex(vertex T) error {
+	_, present := g.adjacencyList[vertex]
+	if !present {
 		g.adjacencyList[vertex] = set.New[T]()
-		return true
+		return nil
 	}
-	return false
+	return errs.DuplicatedVertex(vertex)
 }
 
-func (g *Graph[T]) AddEdge(v0, v1 T) bool {
-	_, ok0 := g.adjacencyList[v0]
-	_, ok1 := g.adjacencyList[v1]
-
-	if ok0 && ok1 {
-		g.adjacencyList[v0].Insert(v1)
-		g.adjacencyList[v1].Insert(v0)
-		return true
+func (g *Graph[T]) AddEdge(v0, v1 T) error {
+	_, present := g.adjacencyList[v0]
+	if !present {
+		return errs.NonExistentVertex(v0)
 	}
 
-	return false
+	_, present = g.adjacencyList[v1]
+	if !present {
+		return errs.NonExistentVertex(v1)
+	}
+
+	g.adjacencyList[v0].Insert(v1)
+	g.adjacencyList[v1].Insert(v0)
+	return nil
+}
+
+func (g *Graph[T]) RemoveEdge(v0, v1 T) error {
+	_, present := g.adjacencyList[v0]
+	if !present {
+		return errs.NonExistentVertex(v0)
+	}
+	_, present = g.adjacencyList[v1]
+	if !present {
+		return errs.NonExistentVertex(v1)
+	}
+
+	g.adjacencyList[v0].Erase(v1)
+	g.adjacencyList[v1].Erase(v0)
+	return nil
 }
