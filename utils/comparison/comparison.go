@@ -2,8 +2,6 @@ package comparison
 
 import (
 	"reflect"
-
-	"github.com/google/go-cmp/cmp"
 )
 
 func isEmpty(obj interface{}) bool {
@@ -51,7 +49,7 @@ func CommutativeSliceComparison[T, U any](s0 []T, s1 []U) bool {
 			if visited[j] {
 				continue
 			}
-			if cmp.Equal(s1Val.Index(j).Interface(), el) {
+			if reflect.DeepEqual(s1Val.Index(j).Interface(), el) {
 				visited[j] = true
 				found = true
 				break
