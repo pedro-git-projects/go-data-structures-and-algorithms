@@ -56,7 +56,7 @@ func TestVMerge(t *testing.T) {
 		1, 3, 7, 8, 2, 4, 5, 6,
 	}
 
-	MergeSort(got)
+	MergeSort(&got)
 
 	want := []int{
 		1, 2, 3, 4, 5, 6, 7, 8,
