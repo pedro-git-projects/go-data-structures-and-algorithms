@@ -104,3 +104,19 @@ func TestPivot(t *testing.T) {
 		t.Errorf("Expected %v, but got %v", want, got)
 	}
 }
+
+func TestQuickSort(t *testing.T) {
+	got := []int{
+		4, 6, 1, 7, 3, 2, 5,
+	}
+
+	Quick(got, 0, len(got)-1)
+
+	want := []int{
+		1, 2, 3, 4, 5, 6, 7,
+	}
+
+	if !reflect.DeepEqual(got, want) {
+		t.Errorf("Expected %v, but got %v", want, got)
+	}
+}

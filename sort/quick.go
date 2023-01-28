@@ -20,3 +20,14 @@ func pivot[T constraints.Ordered](s []T, pivotIdx, endIdx int) int {
 	swap(s, pivotIdx, swapIdx)
 	return swapIdx
 }
+
+// TODO: Remove the need to pass begin and end
+func Quick[T constraints.Ordered](s []T, begin, end int) {
+	if begin >= end {
+		return
+	}
+
+	pivotIdx := pivot(s, begin, end)
+	Quick(s, begin, pivotIdx-1)
+	Quick(s, pivotIdx+1, end)
+}
