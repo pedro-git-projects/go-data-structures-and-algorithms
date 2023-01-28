@@ -86,33 +86,12 @@ func TestSwap(t *testing.T) {
 	}
 }
 
-func TestPivot(t *testing.T) {
-	got := []int{
-		4, 6, 1, 7, 3, 2, 5,
-	}
-
-	gotIdx := pivot(got, 0, len(got)-1)
-	wantIdx := 3
-
-	want := []int{
-		2, 1, 3, 4, 6, 7, 5,
-	}
-
-	if !reflect.DeepEqual(got, want) {
-		t.Errorf("Expected %v, but got %v", want, got)
-	}
-
-	if !reflect.DeepEqual(gotIdx, wantIdx) {
-		t.Errorf("Expected %v, but got %v", want, got)
-	}
-}
-
 func TestQuickSort(t *testing.T) {
 	got := []int{
 		4, 6, 1, 7, 3, 2, 5,
 	}
 
-	Quick(got, 0, len(got)-1)
+	Quick(got)
 
 	want := []int{
 		1, 2, 3, 4, 5, 6, 7,
