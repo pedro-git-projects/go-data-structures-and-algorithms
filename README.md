@@ -278,13 +278,10 @@ func MergeSort[T constraints.Ordered](s *[]T) {
 [Code](https://github.com/pedro-git-projects/go-data-structures-and-algorithms/blob/master/sort/quick.go)
 
 ```go
-func Quick[T constraints.Ordered](s []T, begin, end int) {
-	if begin >= end {
+func Quick[T constraints.Ordered](s []T) {
+	if len(s) <= 1 {
 		return
 	}
-
-	pivotIdx := pivot(s, begin, end)
-	Quick(s, begin, pivotIdx-1)
-	Quick(s, pivotIdx+1, end)
+	quickStep(s, 0, len(s)-1)
 }
 ```
