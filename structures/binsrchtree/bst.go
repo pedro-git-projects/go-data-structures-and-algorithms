@@ -92,3 +92,48 @@ func (bst BST[T]) String() string {
 	}
 	return str
 }
+
+func depthFirstSearchPreOrder[T constraints.Ordered](current *bnode.BNode[T], str string) {
+	fmt.Printf("%v ", current.Value())
+	if current.Left() != nil {
+		depthFirstSearchPreOrder(current.Left(), str)
+	}
+	if current.Right() != nil {
+		depthFirstSearchPreOrder(current.Right(), str)
+	}
+}
+
+func (bst BST[T]) DFSPreOrder() {
+	str := ""
+	depthFirstSearchPreOrder(bst.root, str)
+}
+
+func depthFirstSearchPostOrder[T constraints.Ordered](current *bnode.BNode[T], str string) {
+	if current.Left() != nil {
+		depthFirstSearchPreOrder(current.Left(), str)
+	}
+	if current.Right() != nil {
+		depthFirstSearchPreOrder(current.Right(), str)
+	}
+	fmt.Printf("%v ", current.Value())
+}
+
+func (bst BST[T]) DFSPostOrder() {
+	str := ""
+	depthFirstSearchPreOrder(bst.root, str)
+}
+
+func depthFirstSearchInOrder[T constraints.Ordered](current *bnode.BNode[T], str string) {
+	if current.Left() != nil {
+		depthFirstSearchPreOrder(current.Left(), str)
+	}
+	fmt.Printf("%v ", current.Value())
+	if current.Right() != nil {
+		depthFirstSearchPreOrder(current.Right(), str)
+	}
+}
+
+func (bst BST[T]) DFSInOrder() {
+	str := ""
+	depthFirstSearchPreOrder(bst.root, str)
+}
