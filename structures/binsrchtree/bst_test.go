@@ -1,6 +1,7 @@
 package binsrchtree_test
 
 import (
+	"fmt"
 	"testing"
 
 	"github.com/pedro-git-projects/go-data-structures-and-algorithms/structures/binsrchtree"
@@ -54,5 +55,22 @@ func TestContains(t *testing.T) {
 	expect = false
 	if got != expect {
 		t.Errorf("Expected %t but bot %t", expect, got)
+	}
+}
+
+func TestString(t *testing.T) {
+	bst := binsrchtree.New(47)
+	bst.Insert(21)
+	bst.Insert(76)
+	bst.Insert(18)
+	bst.Insert(52)
+	bst.Insert(82)
+	bst.Insert(27)
+
+	got := fmt.Sprintf("%v", bst)
+	want := "47 21 76 18 27 52 82 "
+
+	if got != want {
+		t.Errorf("Expected %s but got %s", want, got)
 	}
 }

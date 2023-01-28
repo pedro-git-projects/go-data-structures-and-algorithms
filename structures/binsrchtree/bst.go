@@ -1,10 +1,12 @@
 package binsrchtree
 
 import (
+	"fmt"
 	"reflect"
 
 	"github.com/pedro-git-projects/go-data-structures-and-algorithms/structures/bnode"
 	"github.com/pedro-git-projects/go-data-structures-and-algorithms/structures/errs"
+	"github.com/pedro-git-projects/go-data-structures-and-algorithms/structures/queue"
 	"github.com/pedro-git-projects/go-data-structures-and-algorithms/utils/constraints"
 )
 
@@ -22,11 +24,6 @@ func New[T constraints.Ordered](value T) *BST[T] {
 
 func (bst BST[T]) Root() *bnode.BNode[T] {
 	return bst.root
-}
-
-func (bst BST[T]) String() string {
-	str := ""
-	return str
 }
 
 func (bst *BST[T]) Insert(value T) error {
@@ -74,4 +71,24 @@ func (bst BST[T]) Contains(value T) bool {
 	}
 
 	return false
+}
+
+// uses Breadth First Search to format to string
+func (bst BST[T]) String() string {
+	q := queue.New(bst.root)
+	str := ""
+
+	for q.Length() > 0 {
+		current := q.First()
+		q.Dequeue()
+
+		str += fmt.Sprintf("%v ", current.Value().Value())
+		if current.Value().Left() != nil {
+			q.Enqueue(current.Value().Left())
+		}
+		if current.Value().Right() != nil {
+			q.Enqueue(current.Value().Right())
+		}
+	}
+	return str
 }
