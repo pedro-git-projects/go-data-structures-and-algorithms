@@ -25,6 +25,7 @@
 - [Selection Sort](#selection-sort)
 - [Insertion Sort](#insertion-sort)
 - [Merge Sort](#merge-sort)
+- [Quick Sort](#quick-sort)
 
 	---
 
@@ -188,5 +189,102 @@ type Set[T comparable] interface {
 ```go
 type Graph[T comparable] struct {
 	adjacencyList map[T]set.Set[T]
+}
+```
+
+### Bubble Sort 
+
+[Code](https://github.com/pedro-git-projects/go-data-structures-and-algorithms/blob/master/sort/bubble.go)
+
+```go
+func Bubble[T constraints.Ordered](s []T) {
+	for i := len(s) - 1; i > 0; i-- {
+		for j := 0; j < i; j++ {
+			if s[j] > s[j+1] {
+				tmp := s[j]
+				s[j] = s[j+1]
+				s[j+1] = tmp
+			}
+		}
+	}
+}
+```
+
+### Selection Sort 
+
+[Code](https://github.com/pedro-git-projects/go-data-structures-and-algorithms/blob/master/sort/selection.go)
+
+```go
+func Selection[T constraints.Ordered](s []T) {
+	for i := range s {
+		min := i
+		for j := i + 1; j < len(s); j++ {
+			if s[j] < s[min] {
+				min = j
+			}
+		}
+		if i != min {
+			tmp := s[i]
+			s[i] = s[min]
+			s[min] = tmp
+		}
+	}
+}
+```
+
+### Insertion Sort 
+
+[Code](https://github.com/pedro-git-projects/go-data-structures-and-algorithms/blob/master/sort/insertion.go)
+
+```go
+func Insertion[T constraints.Ordered](s []T) {
+	for i := range s {
+		tmp := s[i]
+		j := i - 1
+
+		for j >= 0 && tmp < s[j] {
+			s[j+1] = s[j]
+			s[j] = tmp
+			j--
+		}
+	}
+}
+```
+
+### Merge Sort 
+
+[Code](https://github.com/pedro-git-projects/go-data-structures-and-algorithms/blob/master/sort/merge.go)
+
+```go
+func MergeSort[T constraints.Ordered](s *[]T) {
+	ls := len(*s)
+	mid := ls / 2
+
+	if ls <= 1 {
+		return
+	}
+
+	s1 := (*s)[mid:]
+	s2 := (*s)[:mid]
+
+	MergeSort(&s1)
+	MergeSort(&s2)
+	merge(s, &s1, &s2)
+}
+```
+
+### Quick Sort 
+
+[Code](https://github.com/pedro-git-projects/go-data-structures-and-algorithms/blob/master/sort/quick.go)
+
+```go
+func Quick[T constraints.Ordered](s []T, begin, end int) {
+	if begin >= end {
+		return
+	}
+
+	pivotIdx := pivot(s, begin, end)
+	Quick(s, begin, pivotIdx-1)
+	Quick(s, pivotIdx+1, end)
 }
 ```
