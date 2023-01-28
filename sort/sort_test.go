@@ -9,6 +9,7 @@ func TestBubble(t *testing.T) {
 	got := []int{
 		4, 3, 2, 1, 5,
 	}
+
 	Bubble(got)
 
 	expect := []int{
@@ -51,7 +52,7 @@ func TestInsertion(t *testing.T) {
 	}
 }
 
-func TestVMerge(t *testing.T) {
+func TestMerge(t *testing.T) {
 	got := []int{
 		1, 3, 7, 8, 2, 4, 5, 6,
 	}
@@ -63,6 +64,43 @@ func TestVMerge(t *testing.T) {
 	}
 
 	if !reflect.DeepEqual(got, want) {
+		t.Errorf("Expected %v, but got %v", want, got)
+	}
+}
+
+func TestSwap(t *testing.T) {
+	got := []int{
+		3, 4,
+	}
+
+	swap(got, 0, 1)
+
+	want := []int{
+		4, 3,
+	}
+
+	if !reflect.DeepEqual(got, want) {
+		t.Errorf("Expected %v, but got %v", want, got)
+	}
+}
+
+func TestPivot(t *testing.T) {
+	got := []int{
+		4, 6, 1, 7, 3, 2, 5,
+	}
+
+	gotIdx := pivot(got, 0, len(got)-1)
+	wantIdx := 3
+
+	want := []int{
+		2, 1, 3, 4, 6, 7, 5,
+	}
+
+	if !reflect.DeepEqual(got, want) {
+		t.Errorf("Expected %v, but got %v", want, got)
+	}
+
+	if !reflect.DeepEqual(gotIdx, wantIdx) {
 		t.Errorf("Expected %v, but got %v", want, got)
 	}
 }

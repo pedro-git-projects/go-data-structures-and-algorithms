@@ -24,6 +24,7 @@
 - [Bubble Sort](#bubble-sort)
 - [Selection Sort](#selection-sort)
 - [Insertion Sort](#insertion-sort)
+- [Merge Sort](#merge-sort)
 
 	---
 
