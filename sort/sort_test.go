@@ -3,6 +3,8 @@ package sort
 import (
 	"reflect"
 	"testing"
+
+	"github.com/pedro-git-projects/go-data-structures-and-algorithms/utils/slices"
 )
 
 func TestBubble(t *testing.T) {
@@ -73,7 +75,7 @@ func TestSwap(t *testing.T) {
 		3, 4,
 	}
 
-	swap(got, 0, 1)
+	slices.Swap(got, 0, 1)
 
 	want := []int{
 		4, 3,
